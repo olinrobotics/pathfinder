@@ -3,7 +3,7 @@ from __future__ import print_function
 
 import math
 import roslib
-roslib.load_manifest('orcas')
+roslib.load_manifest('pathfinder')
 import sys
 import rospy
 import cv2
@@ -28,7 +28,8 @@ class LaserRanger(object):
 
         if self.camera_id is None:
             self.bridge = CvBridge()
-            self.image_sub = rospy.Subscriber("camera/image", Image, self.on_image)
+            #self.image_sub = rospy.Subscriber("camera/image", Image, self.on_image)
+            self.image_sub = rospy.Subscriber("camera/image_mono", Image, self.on_image)
         else:
             self.cap = cv2.VideoCapture(self.camera_id)
             self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 10000)

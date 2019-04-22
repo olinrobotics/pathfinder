@@ -3,7 +3,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <cv_bridge/cv_bridge.h>
 #include <sstream> // for converting the command line parameter to integer
-#include "pathfinder/file_finder.h"
+#include "file_finder.h"
 
 int main(int argc, char** argv)
 {
@@ -14,7 +14,7 @@ int main(int argc, char** argv)
   ros::NodeHandle nh;
   image_transport::ImageTransport it(nh);
   image_transport::Publisher pub = it.advertise("camera/image", 1);
-  std::string pkg_path = ros::package::getPath("orcas");
+  std::string pkg_path = ros::package::getPath("pathfinder");
 
   VideoCapture cap;
   std::string first_arg(argv[1]);
