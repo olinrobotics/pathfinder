@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   sensor_msgs
+  message_generation
   image_transport
   cv_bridge
   OpenCV
@@ -112,7 +113,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES pathfinder
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -128,6 +129,24 @@ include_directories(
   ${OpenCV_INCLUDE_DIRS}
 )
 
+## Declare a C++ library
+add_library(${PROJECT_NAME}
+   src/distance_estimator.cpp
+   include/file_finder.h
+)
+
+#add_executable(pathfinder_cam_publisher pathfinder/src/camera_publisher.cpp)
+#target_link_libraries(pathfinder_cam_publisher ${catkin_LIBRARIES} ${PROJECT_NAME})
+#add_dependencies(pathfinder_cam_publisher ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+#add_executable(pathfinder_laser_ranger pathfinder/src/laser_ranger.cpp)
+#target_link_libraries(pathfinder_laser_ranger ${catkin_LIBRARIES} ${PROJECT_NAME})
+#add_dependencies(pathfinder_laser_ranger ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+## Add cmake target dependencies of the library
+## as an example, code may need to be generated before libraries
+## either from message generation or dynamic reconfigure
+add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 #############
 ## Install ##
